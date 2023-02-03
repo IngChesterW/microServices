@@ -1,0 +1,479 @@
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/paciente">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">Paciente </span>
+					</a>
+				</li>
+					<li>
+					<a href="/aplicacion/categorias">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">categorias</span>
+					</a>
+				</li>
+			
+			
+				<li>
+					<a href="/aplicacion/Personal">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">Personal</span>
+					</a>
+				</li>
+
+								<li>
+					<a href="/aplicacion/Analisis">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">Analisis</span>
+					</a>
+				</li>
+								<li>
+					<a href="/aplicacion/Consultas">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">Consultas</span>
+					</a>
+				</li>
+								<li>
+					<a href="/aplicacion/Resultados">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">resultados</span>
+					</a>
+				</li>
+								</li>
+								<li>
+					<a href="/aplicacion/DetalleVentas">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">Detalle Ventas</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2>ADICIONAR </h2>
+
+						
+					</div>
+	
+                        				    <form action="/aplicacion/categoriasAdi" method="POST">
+	    				  <input type="text" name="Descripcion" placeholder="Descripcion">
+				          
+						  <input type="submit" value="adicionar categoria ">
+						</form>
+
+
+				 
+						<table>
+							<thead>
+								{{!-- {{lista usuarios /Aplicacion/Usuarios}} --}}
+                         {{#if message}}
+
+						 {{#each message}}
+						 <h1>no hay registros, problema del backend en la nube</h1>
+                        {{/each}}
+						{{/if}}
+                        {{#if ListaUsuario }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									<td><span class="status delivered">
+										<a href="/aplicacion/Usuario/{{id}}" >adicionar usuarios</a>
+										</span></td>
+								
+								</tr>
+							</thead>
+                            {{#each ListaUsuario}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									<td><span class="status delivered">
+										<a href="/aplicacion/Usuario/{{id}}" >ver informacion</a> <br>
+										<a href="/aplicacion/UsuarioElim/{{id}}" >eliminar usuario</a>
+										</span></td>
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+	{{!-- {{lista  /Aplicacion/Usuario/:id}} --}}
+ {{#if ProcesoUsuario }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ProcesoUsuario}}
+                           
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									
+									
+								</tr>
+                                 
+							</tbody>
+                            
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+								{{!-- {{lista paciente /Aplicacion/Paciente}} --}}
+
+                        {{#if ListaPaciente }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaPaciente}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									<td><span class="status delivered">
+										<a href="/aplicacion/Usuario/{{id}}" >ver informacion</a> <br>
+										<a href="/aplicacion/PacienteElim/{{id}}" >eliminar usuario</a>
+										</span></td>
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+
+								{{!-- {{lista categorias /Aplicacion/categorias}} --}}
+
+                        {{#if ListaCategorias }}
+								<tr>
+									<td>id</td>
+									<td>Descripcion</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaCategorias}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									<td>{{id}}</td>
+									<td>{{Descripcion}}</td>
+	                                
+                                 
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+ 
+
+
+ 	{{!-- {{lista usuarios /Aplicacion/Personal}} --}}
+
+                        {{#if ListaPersonal }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaPersonal}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+
+ 	{{!-- {{lista usuarios /Aplicacion/Consultas}} --}}
+
+                        {{#if ListaConsultas }}
+								<tr>
+									<td>id</td>
+									<td>motivo</td>
+									<td>fecha</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaConsultas}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{id}}</td>
+	                                 
+                                 
+									<td>{{Motivo}}</td>
+									
+									<td>{{Fecha}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+
+
+
+ 	{{!-- {{lista usuarios /Aplicacion/Analisis}} --}}
+
+                        {{#if ListaAnalisis }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaAnalisis}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombre}}</td>
+	                                 
+                                 
+									<td>{{Descripcion}}</td>
+									
+									<td>{{Precio}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	{{!-- {{lista usuarios /Aplicacion/Resultados}} --}}
+
+                        {{#if ListaResultados }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaResultados}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+ 	{{!-- {{lista usuarios /Aplicacion/DetalleVenta}} --}}
+
+                        {{#if ListaDetalleVenta }}
+								<tr>
+									<td>id </td>
+									<td>Cantidad</td>
+									<td>Precio</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaDetalleVenta}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{id}}</td>
+	                                 
+                                 
+									<td>{{Cantidad}}</td>
+									
+									<td>{{Precio}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+						</table>
+                          
+					
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>

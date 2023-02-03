@@ -1,0 +1,37 @@
+<section id="log">
+            <div class="containerlog">
+                <div class="user signinBx">
+                    <div class="imgBx"><img src="/img/xp.jpeg"></div>
+                    <div class="formBx">
+                        <form action="/authentication/signin" method="POST">
+                            <h2>INICIAR SESION</h2>
+                            <input type="text" name="nombre" placeholder="Nombre de Usuario">
+                            <input type="password" name="password" placeholder="Contraseña">
+                            <input type="submit" name="" value="Login">
+                            <p class="signup">no tienes cuenta? <a href="#" onclick="toggleForm();">crear cuenta.</a></p>
+                        </form>
+                    </div>
+                </div>
+                <div class="user signupBx">
+                    <div class="formBx">
+                        <form action="/aplicacion/signup" method="POST">
+                            <h2>Crear Cuenta</h2>
+                            <input type="text" name="nombre" placeholder="nombre de usuario">
+                            <input type="number" name="telefono" placeholder="ingrese su cel">
+                            <input type="password" name="password" placeholder="Ingrese su nueva contraseña">
+                            <input type="submit" name="" value="Sign up">
+                            <p class="signup">ya tienes cuenta? <a href="#" onclick="toggleForm();">hacer login.</a></p>
+                        </form>
+                    </div>
+                    <div class="imgBx"><img src="/img/log.gif"></div>
+                </div>
+            </div>
+        </section>
+        <script type="text/javascript">
+            function toggleForm(){
+                var containerlog = document.querySelector('.containerlog');
+                var section = document.querySelector('section');
+                containerlog.classList.toggle('active')
+                section.classList.toggle('active')
+            }
+        </script>

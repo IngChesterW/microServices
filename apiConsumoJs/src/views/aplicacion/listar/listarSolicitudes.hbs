@@ -1,0 +1,795 @@
+{{#if infoAdmin}}
+<div class="containerdash">
+		<div class="navigation">
+									<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">Usuarios</span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/paciente">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">Paciente </span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/Personal">
+						<span class="icon"><i class="fa fa-medkit" aria-hidden="true"></i></span>
+						<span class="title">Personal</span>
+					</a>
+				</li>
+					<li>
+					<a href="/aplicacion/categorias">
+						<span class="icon"><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
+						<span class="title">Departamentos</span>
+					</a>
+				</li>
+			
+			
+
+								<li>
+					<a href="/aplicacion/solicitudes">
+						<span class="icon"><i class="fa fa-file" aria-hidden="true"></i></span>
+						<span class="title">Reportes</span>
+					</a>
+				</li>
+								<li>
+					<a href="/aplicacion/facturas">
+						<span class="icon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+						<span class="title">Facturas</span>
+					</a>
+
+								</li>
+								<li>
+					<a href="/aplicacion/logOut">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">Salir </span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2 >LISTA DE REPORTES </h2>
+
+		   
+					</div>
+	         <fieldset style="  width:50%;  margin: 7px;">
+					<legend>ORDENAR POR :</legend>
+				      <div id="dropOr" style=" width:100%; height:87px;  margin-top: 15px; overflow-y:scroll; ">
+							     <div>
+									<p style="position:absolute;   display: block;  z-index:0;">
+
+
+										 <fieldset style="margin: 7px;">
+									         <legend style="padding: 2px;" > POR PACIENTE : </legend>
+											    <div style="margin: 7px;">
+                                                   <form action="/aplicacion/solicitudesOrden" method="POST" id="nuevoUsu" >
+                                                           	 <select id="idUsuarios" name="departamento">
+                                						          {{#each todoUsPa}}
+							                                         <option value={{idUsuarios}}>{{nombre}}</option>
+							                                      {{/each}}
+							                                 </select>
+													 <input type="submit" value="enviar fecha">
+											        </form>
+											    </div>
+										 </fieldset>
+
+										 <fieldset style="margin: 7px;">
+									         <legend style="padding: 2px;" > POR DOCTOR : </legend>
+											    <div style="margin: 7px;">
+                                                   <form action="/aplicacion/solicitudesOrden" method="POST" id="nuevoUsu" >
+                                                           	 <select id="idUsuarios" name="departamento">
+                                						          {{#each todoUsDo}}
+							                                         <option value={{idUsuarios}}>{{nombre}}</option>
+							                                      {{/each}}
+							                                 </select>
+													 <input type="submit" value="enviar fecha">
+											        </form>
+											    </div>
+										 </fieldset>
+
+										 <fieldset style="margin: 7px;">
+									         <legend style="padding: 2px;" > POR FECHA : </legend>
+											    <div style="margin: 7px;">
+                                                   <form action="/aplicacion/solicitudesOrden" method="POST" id="nuevoUsu" >
+                                                     <input type="date" name="fechaIn" placeholder="fecha de inicio"> 
+													 <input type="date" name="fechaFin" placeholder="fecha final"> 
+													 <input type="submit" value="enviar fecha">
+											        </form>
+											    </div>
+										 </fieldset>
+									</p>
+								 </div>
+						
+						 
+                      </div>
+	</fieldset>
+
+
+
+                
+    {{#each infoAdmin }}
+						
+<div id="table-wrapper">
+  <div id="table-scroll">
+
+    <table>
+        
+        <thead>
+				
+            <tr>                                
+                					
+									<th><p> SOLICITUD  CON ID {{idSol}}<br> <span class="status delivered">
+								     <a href="/aplicacion/eliminarSol/{{idSol}}" >Eliminar solicitud </a>
+									   
+								   </span> </p></th>
+								
+            </tr>
+        </thead>
+    
+        <tbody>
+
+       	 {{#each infoAdmin}}	
+        <tr>                       
+			                        
+            						<td><h5> IDSOL: </h5>{{idSol}}</td>
+									<td><h5> NOMBRE.DEP : </h5>{{nombreDep}}</td>
+									<td><h5>  </h5>{{telefonfo}}</td>
+								    <td><h5>  </h5>{{telefonfo}}</td>
+							        <td><h5>  </h5>{{telefonfo}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del Servicio </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+
+	 {{#each usuarios}}	
+        <tr>                       
+			                        <td><h5> IDPACIENTE : </h5>{{idUsuarios}}</td>
+            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del usuario </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+ 	 {{#each doctores}}	
+        <tr>                       
+			                         <td><h5> IDdOCTOR : </h5>{{idUsuarios}}</td>
+            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del usuario </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+
+
+
+
+  	 {{#each servicios}}	
+        <tr>                       
+			                        
+            						<td><h5> IDSERV: </h5>{{idServ}}</td>
+									<td><h5> NOMBRE.SERV : </h5>{{nombreServ}}</td>
+									<td><h5> PRECIO : </h5>{{costo}}</td>
+								    <td><h5>  </h5>{{telefonfo}}</td>
+							        <td><h5>  </h5>{{telefonfo}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del Servicio </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+        </tbody>  
+       
+                	
+    </table>
+    
+  </div>
+</div>
+      {{/each}}    
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>
+	{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{{#if infoPac}}
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">MI PERFIL</span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/paciente">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">MIS PACIENTES </span>
+					</a>
+				</li>
+					<li>
+					<a href="/aplicacion/categorias">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">MIS SERVICIOS</span>
+					</a>
+				</li>
+			
+			
+				<li>
+					<a href="/aplicacion/Personal">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">MI HISTORIAL</span>
+					</a>
+				</li>
+
+								<li>
+					<a href="/aplicacion/solicitudes">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">SOLICITUDES</span>
+					</a>
+				</li>
+								
+							
+								<li>
+					<a href="/aplicacion/DetalleVentas">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">FACTURAS</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2 >LISTA DE DEPARTAMENTOS </h2>
+						<label style="	background: #03a9f4;
+	color: #fff;" for="cars">Choose a car:</label>
+						<select name="cars" id="cars">
+						<option value="volvo">Volvo</option>
+						<option value="saab">Saab</option>
+						<option value="mercedes">Mercedes</option>
+						<option value="audi">Audi</option>
+						</select>
+		   
+					</div>
+	
+
+
+
+                
+    {{#each infoPac }}
+<div id="table-wrapper">
+  <div id="table-scroll">
+
+    <table>
+        
+        <thead>
+				
+            <tr>                                
+                					
+									<th><p> SOLICITUD {{idSol}} {{fecha}}<br> <span class="status return">
+								     <a href="/aplicacion/eliminarSol/{{idSol}}" >Eliminar solicitud </a>
+								   </span>&nbsp; <span class="status delivered">
+								     <a href="/aplicacion/editarSol/{{idSol}}" >editar solicitud </a>
+								   </span>  </p></th>
+								
+            </tr>
+        </thead>
+    
+        <tbody>
+
+
+	 {{#each doctores}}	
+        <tr>                       
+			                        <td><h5> IDDOCTOR : </h5>{{idUsuarios}}</td>
+            						<td><h5> DOCTOR : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+
+                             
+        </tr>
+ {{/each}}
+
+  	 {{#each servicios}}	
+        <tr>                       
+			                        
+            						<td><h5> IDSERV: </h5>{{idServ}}</td>
+									<td><h5> NOMBRE.SERV : </h5>{{nombreServ}}</td>
+									<td><h5> PRECIO : </h5>{{costo}} BS</td>
+								    <td><h5>  </h5>{{telefonfo}}</td>
+							        <td><h5>  </h5>{{telefonfo}}</td>
+								   
+
+                             
+        </tr>
+ {{/each}}
+        </tbody>  
+       
+                	
+    </table>
+    
+  </div>
+</div>
+      {{/each}}    
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+
+
+  
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>
+	{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		{{#if infoDoc}}
+<div class="containerdash">
+		<div class="navigation">
+						<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">MI PERFIL</span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/paciente">
+						<span class="icon"><i class="fa fa-wheelchair" aria-hidden="true"></i></span>
+						<span class="title">MIS PACIENTES </span>
+					</a>
+				</li>
+					<li>
+					<a href="/aplicacion/categorias">
+						<span class="icon"><i class="fa fa-medkit" aria-hidden="true"></i></span>
+						<span class="title">MIS SERVICIOS</span>
+					</a>
+				</li>
+			
+			
+				<li>
+					<a href="/aplicacion/Personal">
+						<span class="icon"><i class="fa fa-book" aria-hidden="true"></i></span>
+						<span class="title">MI HISTORIAL</span>
+					</a>
+				</li>
+
+								<li>
+					<a href="/aplicacion/solicitudes">
+						<span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+						<span class="title">SOLICITUDES</span>
+					</a>
+				</li>
+								
+							
+								<li>
+					<a href="/authentication/logOut">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">SALIR</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2 >LISTA DE DEPARTAMENTOS </h2>
+				
+		   
+					</div>
+	
+
+
+
+                
+    {{#each infoDoc }}
+<div id="table-wrapper">
+  <div id="table-scroll">
+
+    <table>
+        
+        <thead>
+				
+            <tr>                                
+                					
+									<th><p> SOLICITUD  CON ID {{idSol}}<br> 
+										<span class="status return">
+								     		<a href="/aplicacion/eliminarSol/{{idSol}}" >Eliminar solicitud </a> 
+                                        </span> &nbsp;
+											<span class="status delivered">
+								     		<a href="/aplicacion/confirmarSol/{{idSol}}" >confirmar solicitud </a> 
+                                        </span> 
+								   </p></th>
+								
+            </tr> 
+        </thead>
+    
+        <tbody>
+
+       	
+        <tr>                       
+			                        
+								  <td><h5> IDdOCTOR : </h5>{{idUsuarios}}</td>
+            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+
+                                  
+                             
+        </tr>
+   
+
+	 {{#each pacientes}}	
+        <tr>                       
+			                        <td><h5> IDPACIENTE : </h5>{{idUsuarios}}</td>
+            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+				
+                             
+        </tr>
+ {{/each}}
+
+  	 {{#each servicios}}	
+        <tr>                       
+			                        
+            						<td><h5> IDSERV: </h5>{{idServ}}</td>
+									<td><h5> NOMBRE.SERV : </h5>{{nombreServ}}</td>
+									<td><h5> PRECIO : </h5>{{costo}} BS</td>
+								    <td><h5>  </h5>{{telefonfo}}</td>
+							        <td><h5>  </h5>{{telefonfo}}</td>
+								   
+				
+                             
+        </tr>
+ {{/each}}
+        </tbody>  
+       
+                	
+    </table>
+    
+  </div>
+</div>
+      {{/each}}    
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+
+
+  
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>
+	{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		{{#if mensagem}}
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">MI PERFIL</span>
+					</a>
+				</li>
+				<li>
+					<a href="/aplicacion/paciente">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">MIS PACIENTES </span>
+					</a>
+				</li>
+					<li>
+					<a href="/aplicacion/categorias">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">MIS SERVICIOS</span>
+					</a>
+				</li>
+			
+			
+				<li>
+					<a href="/aplicacion/Personal">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">MI HISTORIAL</span>
+					</a>
+				</li>
+
+								<li>
+					<a href="/aplicacion/solicitudes">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">SOLICITUDES</span>
+					</a>
+				</li>
+								
+							
+								<li>
+					<a href="/aplicacion/DetalleVentas">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">FACTURAS</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2 >LISTA DE DEPARTAMENTOS </h2>
+				</div>
+	
+
+
+
+                
+    
+<div id="table-wrapper">
+  <div id="table-scroll">
+
+    <table>
+        
+        <thead>
+				
+            <tr>                                
+                					
+									<th><p> NO TIENE SOLICITUDES <br>  </p></th>
+								
+            </tr>
+        </thead>
+    
+        <tbody>
+
+       	
+        <tr>                       
+			                    
+        </tr>
+   
+
+	 {{#each pacientes}}	
+        <tr>                       
+			                        <td><h5> IDPACIENTE : </h5>{{idUsuarios}}</td>
+            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
+									<td><h5> TELEFONO : </h5>{{telefono}}</td>
+									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del usuario </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+
+  	 {{#each servicios}}	
+        <tr>                       
+			                        
+            						<td><h5> IDSERV: </h5>{{idServ}}</td>
+									<td><h5> NOMBRE.SERV : </h5>{{nombreServ}}</td>
+									<td><h5> PRECIO : </h5>{{costo}} BS</td>
+								    <td><h5>  </h5>{{telefonfo}}</td>
+							        <td><h5>  </h5>{{telefonfo}}</td>
+								   
+								  <td><span class="status delivered">
+								     <a href="/aplicacion/adicionarServ/{{idServ}}" >ver info del Servicio </a>
+									   
+								   </span>
+                                  </td>
+                             
+        </tr>
+ {{/each}}
+        </tbody>  
+       
+                	
+    </table>
+    
+  </div>
+</div>
+        
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+
+
+  
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>
+	{{/if}}

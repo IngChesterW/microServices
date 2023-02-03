@@ -1,0 +1,194 @@
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/dashboard">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">Usuarios</span>
+					</a>
+				</li>
+				<li>
+					<a href="/dashboard/consultas">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">Pacientes </span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="/dashboard/analisis">
+						<span class="icon"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+						<span class="title">categorias</span>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/authentication/logout">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">resultados</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2>LISTAR </h2>
+						
+					</div>
+	
+
+
+
+				 
+						<table>
+							<thead>
+								{{!-- {{lista usuarios /Aplicacion/Usuarios}} --}}
+
+                        {{#if ListaUsuario }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaUsuario}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+								{{!-- {{lista paciente /Aplicacion/Paciente}} --}}
+
+                        {{#if ListaPaciente }}
+								<tr>
+									<td>nombre</td>
+									<td>apellido</td>
+									<td>cargo</td>
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaPaciente}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+									<td>{{Apellidos}}</td>
+									
+									<td>{{Cargo}}</td>
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+
+								{{!-- {{lista categorias /Aplicacion/categorias}} --}}
+
+                        {{#if ListaCategorias }}
+								<tr>
+									<td>nombre</td>
+									
+									
+								
+								</tr>
+							</thead>
+                            {{#each ListaCategorias}}
+                            {{#each this}}	
+							<tbody>
+                                
+								<tr>
+									
+									<td>{{Nombres}}</td>
+	                                 
+                                 
+					
+									
+									
+									
+								</tr>
+                                 
+							</tbody>
+                             {{/each}}
+                             	{{/each}}
+                            {{/if}}
+
+
+
+
+
+
+
+						</table>
+                          
+					
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>

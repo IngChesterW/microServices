@@ -1,0 +1,84 @@
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA BILBAO </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/aplicacion/Usuario">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">Usuario</span>
+					</a>
+				</li>
+	
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders"> 
+					  <div class="cardHeader">
+						<h2>editar informacion de usuarios </h2>
+
+						
+					</div>
+                         
+	               
+                    <form action="/aplicacion/editarUsuario" method="POST">
+						 {{#each infoAntiga}}				
+								<input type="text" name="idUsuarios" value={{idUsuarios}}> 
+								<input type="text" name="nombre" value={{nombre}}> 
+								<input type="text" name="apellidos" value={{apellidos}}> 
+								<input type="date" name="fechaNac" value={{fechaNac}}> 
+								<input type="text" name="password" placeholder='password'>
+                                <label for="departamento">departamentos:</label>
+							    <select id="departamento" name="departamento">
+						        {{#each departamentos}}
+							    <option value={{idDep}}>{{nombreDep}}</option>
+							    {{/each}}
+							     </select>
+								<input type="number" name="telefono" placeholder={{telefono}}>
+								 <input type="submit" value="modificar usuario ">>  
+						  {{/each}}
+					</form>
+	
+		
+                
+				
+              
+                         
+                          
+					
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+
+   
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>

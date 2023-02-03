@@ -1,0 +1,105 @@
+
+<div class="containerdash">
+		<div class="navigation">
+			<ul>
+				<li>
+					<a >
+						
+						<span class="title"><h2>CLINICA RANDOM </h2></span>
+					</a>
+				</li>
+				
+			 
+
+				<li>
+					<a href="/dashboard">
+						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="title">MI PERFIL</span>
+					</a>
+				</li>
+				<li>
+					<a href="/dashboard/consultas">
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">CONSULTAS </span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="/dashboard/analisis">
+						<span class="icon"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+						<span class="title">ANALISIS</span>
+					</a>
+				</li>
+			
+				<li>
+					<a href="/authentication/logout">
+						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+						<span class="title">SALIR</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle" onclick="toggleMenu()"></div>
+				
+			</div>
+		
+
+			<div class="details">
+				<div class="recentOrders">
+					  <div class="cardHeader">
+						<h2>PRUEBAS API</h2>
+						
+					</div>
+	
+
+
+{{#each consultasDoc}}
+					 
+						<table>
+							<thead>
+								<tr>
+									<td>idConsulta</td>
+									<td>Nombre Paciente</td>
+									<td>Fecha</td>
+									<td>Estado</td>
+									<td>Descripcion</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									
+									<td>{{idConsulta}}</td>
+									{{#each paciente}}
+									<td>{{nombreUsu}}</td>
+									{{/each}}
+									<td>{{fecha}}</td>
+									<td>{{estado}}</td>
+									<td>{{descripcion}}</td>
+									
+									<td><span class="status return">
+										<a href="/dashboard/confirmarConsulta/{{idConsulta}}" >confirmar</a>
+										</span></td>
+								</tr>
+							</tbody>
+						</table>
+					{{/each}}	
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggle = document.querySelector('.toggle');
+			let main = document.querySelector('.main');
+			navigation.classList.toggle('active');
+			toggle.classList.toggle('active');
+			main.classList.toggle('active');
+		}
+	</script>
