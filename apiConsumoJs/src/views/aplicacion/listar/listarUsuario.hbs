@@ -85,6 +85,7 @@
 			                      
             						<td><h5> ID-USUARIO : </h5>{{idUsuarios}}</td>
 									<td><h5> NOMBRE : </h5>{{nombre}}</td>
+									<td><h5> NOMBRE : </h5>{{apellidos}}</td>
                                     <td><h5> APELLIDOS :</h5>{{apellidos}}</td>
 									<td><h5> NACIDO EL :</h5>{{fechaNac}}</td>
 									<td><h5> TELEFONO :</h5>{{telefono}}</td>
@@ -239,10 +240,12 @@
 			                      
             						<td><h5> ID-USUARIO : </h5>{{idUsuarios}}</td>
 									<td><h5> NOMBRE : </h5>{{nombre}}</td>
+									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
                                     <td><h5> TELEFONO :</h5>{{telefono}}</td>
+									<td><h5> FECHA NAC :</h5>{{fechaNac}}</td>
 									{{#if departamento}}
 									{{#each departamento}}
-	                                <td><h5> tipo </h5>{{nombreDep}}</td>
+	                                <td><h5> DEPARTAMENTO </h5>{{nombreDep}}</td>
 									{{/each}}
 									{{else}}
 									<td><h5> DEPARTAMENTO : </h5>no tine Dep</td>

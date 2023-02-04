@@ -128,7 +128,7 @@ router.get('/editarUsuario/:id',(req,res)=>{
    await pool.query('update  usuarios set ? where idUsuarios = ?',[nuevaInfo,idUsuarios]);
    res.send('back');
   });
-
+ 
 
 
 //pacientes
@@ -198,7 +198,7 @@ router.get('/categorias/:idUsuarios',async(req,res)=>{
   }else{
     console.log('no hay')
     const message = { yo:'eu'};
-    console.log(message);
+    console.log(message); 
     res.send(message);
   }
   };
@@ -283,7 +283,7 @@ router.get('/listarServ/:id', async(req,res)=>{
   const {id} = req.params
   const idUsuarios = id;
   console.log(id);
-   const info =await pool.query('select *  from usuarios, departamentos where usuarios.idUsuarios = ? and usuarios.departamento = departamento.idDep',[idUsuarios]);
+   const info =await pool.query('select *  from usuarios, departamentos where usuarios.idUsuarios = ? and usuarios.departamento = departamentos.idDep',[idUsuarios]);
   await asyncForEach(info, async (sect) => {
     sect.servicios = await pool.query(`select * from servicios where idDep = ${sect.departamento}`);
   });
@@ -357,9 +357,9 @@ router.get('/listarSolicitudes/:idUsuarios',async(req,res)=>{
   
   };
   if(grado === 2){
-   console.log(idUsuarios) 
+   console.log(req.session) 
    const estado = 'solicitado';
-   const info = await pool.query('select * from solicitudes where  estado =  ?',[estado]);
+   const info = await pool.query('select * from solicitudes where  estado =  ? ',[estado]);
    await asyncForEach(info, async (sect) => {
      sect.pacientes = await pool.query(`select * from usuarios where idUsuarios = ${sect.idUsuario} `);
      await asyncForEach(info, async (sect) => {
@@ -435,14 +435,28 @@ router.post('/editarSol',async(req,res)=>{
 })
 
 //confirmar consultas
-router.get('/confirmarSol/:idSol', async(req,res)=>{
-  const {idSol} = req.params;
-  const estado = 'confirmado';
-  await pool.query('update solicitudes set ? where idSol = ?',[estado,idSol])
+router.post('/confirmarSol', async(req,res)=>{
+  const {idSol,idUsuarios} = req.body;
+  console.log(idUsuarios);
+  const puta = {estado : 'confirmado', doctor:idUsuarios}
+  await pool.query('update solicitudes set ? where idSol = ?' ,[puta,idSol])
   res.send('pedo')
 });
 
-
+//finalizar un servicio 
+router.put('/finalizarSol/:idSol',async(req,res)=>{
+    const {idSol} = req.params;
+    console.log(idSol);
+    const es = {estado : 'finalizado'}
+    try{
+    await pool.query('update solicitudes set ? where idSol = ?',[es,idSol]);
+    res.send('hecho');
+    }catch(e){
+      console.log(e);
+    }
+    
+});
+ 
 //listar resultados
 
 
@@ -453,7 +467,7 @@ router.get('/listarResultados/:idUsuarios',async(req,res)=>{
   const grado = auxi.grado;
   console.log(grado)
   if(grado === 1){
-    const auxi = { estado : 'solicitado'};
+    const auxi = { estado : 'solicitado'}; 
    console.log('ADMIN DASH')
    const info = await pool.query('select * from resultados where idPaciente = ?',[idUsuarios]);
     res.send(info.idServ);
@@ -506,7 +520,83 @@ router.get('/listarResultados/:idUsuarios',async(req,res)=>{
     }
   }
 });
- 
+
+//listar facturas 
+
+router.get('/listarFacturas/:idUsuarios',async(req,res)=>{
+  const {idUsuarios} = req.params; 
+  const grad = await  pool.query('select grado from usuarios where idUsuarios =?',[idUsuarios]);
+  auxi = grad[0];
+  const grado = auxi.grado;
+  console.log(grado)
+  if(grado === 1){
+   console.log('ADMIN DASH')
+   const info = await pool.query('select * from facturas ');
+   await asyncForEach(info, async (sect) => {
+     sect.paciente = await pool.query(`select * from usuarios where idUsuarios = ${sect.paciente} `);
+     await asyncForEach(info, async (sect) => {
+     sect.servicios =  await pool.query(`select * from servicios where idServ = ${sect.idServ}`);
+     await asyncForEach(info, async (sect) => {
+      sect.doctores =  await pool.query(`select * from usuarios where idUsuarios = ${sect.doctor} `);
+     });
+    });
+    });
+    if (info[0] ){
+      console.log('hay')
+      res.send(info);
+    }else{
+      console.log('no hay')
+      const putaQuePariu = { yo:'eu'};
+      res.send(putaQuePariu);
+    }
+  
+  };
+  if(grado === 2){
+   console.log(idUsuarios) 
+   const estado = 'solicitado';
+   const info = await pool.query('select * from solicitudes where  estado =  ?',[estado]);
+   await asyncForEach(info, async (sect) => {
+     sect.pacientes = await pool.query(`select * from usuarios where idUsuarios = ${sect.idUsuario} `);
+     await asyncForEach(info, async (sect) => {
+     sect.servicios =  await pool.query(`select * from servicios where idServ = ${sect.idServicio}`);
+    });
+    });
+    if (info[0] ){
+      console.log('hay')
+      res.send(info);
+    }else{
+      console.log('no hay')
+      const putaQuePariu = { yo:'eu'};
+      res.send(putaQuePariu);
+    }
+  }; 
+  if(grado === 3){
+    console.log(idUsuarios) 
+    const estado = 'solicitado';
+    const info = await pool.query('select * from  solicitudes where  estado =  ? and idUsuario = ?',[estado,idUsuarios]);
+    await asyncForEach(info, async (sect) => {
+      sect.doctores = await pool.query(`select * from usuarios where idUsuarios = ${sect.doctor} `);
+      await asyncForEach(info, async (sect) => {
+      sect.servicios =  await pool.query(`select * from servicios where idServ = ${sect.idServicio}`);
+     });
+     });
+     if (info[0] ){
+       console.log('hay')
+       res.send(info);
+     }else{
+       console.log('no hay')
+       const putaQuePariu = { yo:'eu'};
+       res.send(putaQuePariu); 
+     }
+  };
+});
+router.delete('/eliminarFac/:idFac',async (req,res)=>{
+  console.log('carajo')
+  const {idFac}= req.params;
+  console.log(idFac);
+  await pool.query('delete from facturas where idFac = ?',[idFac]);
+  res.send('hecho')
+})
 
 
-module.exports= router;
+module.exports= router;  

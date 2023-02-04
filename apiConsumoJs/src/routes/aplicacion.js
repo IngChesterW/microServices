@@ -18,12 +18,11 @@ const asyncForEach = async (array, callback) => {
 };
 
 router.get('/prueba',async (req,res)=>{
-       await request("http://localhost:4000/aplicacion/prueba/",(err,response,body)=>{  
-           res.send(response.body);
-        }); 
+     console.log(req.session.idUsuarios);
 
 });
  
+
 ////////////////////////////////////////////---USO------DE-------SESIONES---INICIO--////////////////////////////////////////////////////////////
 
 //ENTRAR-------EN-------------------LOGIN-------GET----------------------------->
@@ -120,7 +119,7 @@ router.get('/eliminarUsuario/:idUsuarios', async (req,res)=>{
      req.flash('message','algo deu errado');
      res.redirect(301,'back');
   }else{
-    req.flash('message', idUsuarios + ' fue eliminado correctamente');
+    req.flash('message', idUsuarios + ' fue eliminado Scorrectamente');
     res.redirect(301,'back');
   };
   })
@@ -257,7 +256,7 @@ router.post('/categoriasAdi',async(req,res)=>{
       data: {nombreDep}
   }).then((response,err,body)=>{
       req.flash('message', ' el departamento de  ' + nombreDep + ' fue agregado correctamente');
-      res.redirect(301,'aplicacion/categorias');
+      res.redirect(301,'categorias');
   }).catch((e)=>{
      console.log(e);
   })
@@ -274,7 +273,7 @@ router.get('/eliminarCat/:idDep',async(req,res)=>{
       console.log(err);
       res.redirect(301,'back');
      }else{
-      req.flash('message', id + 'fue eliminado correctamente');
+      req.flash('message', id + 'fue eliminados correctamente');
       res.redirect(301,'back');
 
      }
@@ -298,8 +297,7 @@ router.get('/servicios',async(req,res)=>{
      console.log(err);
      res.redirect(301,'back');
     }else{
-     req.flash('message', id + 'fue eliminado correctamente');
-     res.redirect(301,'back');
+     res.redirect(301,'servicios');
 
     }
   });
@@ -326,15 +324,16 @@ router.post('/adicionarServ',async(req,res)=>{
     data: nuevoInfo
 }).then((response,err,body)=>{
     req.flash('message',nuevoInfo.nombreServ + ' fue adicionado correctamente');
-    res.redirect(301,'back')
+    console.log('me casdoadjasdjaSJasijfdapjsfjd')
+    res.redirect(301,'categorias')
 }).catch((e)=>{
    console.log(e);
-   res.redirect(301,'back')
+   res.redirect(301,'back') 
 })
    
 });
 
-
+ 
  
 
 //eliminar-------servicios----------------------------------------------------------------->
@@ -348,7 +347,7 @@ router.get('/eliminarServ/:idServ',async(req,res)=>{
       console.log(err);
       res.redirect(301,'back');
      }else{
-      req.flash('message', id + 'fue eliminado correctamente');
+      req.flash('message', id + 'fue eliminadoS correctamente');
       res.redirect(301,'back');
 
      }
@@ -422,14 +421,8 @@ router.get('/solicitudes',async(req,res)=>{
     };
     if(grado === 3){
       const infoPac = JSON.parse(body);
-      if(infoPac.yo){
-          const mensagem = 'no tiene agregado';
-          res.render('aplicacion/listar/listarSolicitudes',{mensagem}) 
-      }else{
-        console.log(infoPac)
-        res.render('aplicacion/listar/listarSolicitudes',{infoPac}) 
-      }
-     
+      console.log(infoPac)
+      res.render('aplicacion/listar/listarSolicitudes',{infoPac}) 
     }   
  
  }); 
@@ -463,7 +456,7 @@ router.post('/solicitudes/adicionar', async(req,res)=>{
 })  
 });
 
-//adicionar------------solicitudes------------------------post----------------------------------->
+//EDITAR------------solicitudes------------------------post----------------------------------->
 router.post('/modificarSol', async (req,res)=>{
   const {idSol,idServ,idUsuario,grado,idServicio,fecha,estado,doctor} = req.body;
   const novaInfo = {idServ,idUsuario,grado,idServicio,fecha,estado,doctor} 
@@ -501,32 +494,56 @@ router.get('/eliminarSol/:idSol',async(req,res)=>{
 //confirmar------solicitudes-------------------get----------------->
 router.get('/confirmarSol/:idSol', async(req,res)=>{
   const {idSol} = req.params;
-  request('http://localhost:4000/aplicacion/confirmarSol/'+idSol,(err,response,body)=>{
-    if(err){
-     console.log(err);
-     res.redirect(301,'aplicacion/solicitudes');
-    }else{
-     req.flash('message', id + 'fue eliminado correctamente');
-     res.redirect(301,'aplicacion/solicitudes');
+  const idUsuarios = req.session.idUsuarios;
+  const novaInfo = {idSol,idUsuarios}
+  console.log(idSol);
+  await axios({ 
+    method: 'post',   
+    url: 'http://localhost:4000/aplicacion/confirmarSol/',
+    data: novaInfo
+}).then((response,err,body)=>{
+    req.flash('message',idSol + ' fue adicionado correctamente');
+    res.redirect(301,'back') 
+}).catch((e)=>{
+   console.log(e);
+   req.flash('message', ' mal');
+   res.redirect(301,'/aplicacion/solicitudes')
+});
 
-    }
-  });
 })
 
 //editar----solicitudes------------------------get-------------------------------------------->
 router.get('/editarSol/:idSol',async(req,res)=>{ 
-     const{idSol}=req.params;
+     const{idSol}=req.params; 
      request('http://localhost:4000/aplicacion/editarSol/'+idSol,(err,response,body)=>{
       if(err){
-      console.log('tem erro fdm ');
+      console.log('tem erro fdm ');  
        res.redirect(301,'back');
       }else{
-       const info = JSON.parse(body);
-       console.log(info)
+       const info = JSON.parse(body); 
+       console.log(info) 
        res.render('aplicacion/modificar/modificarSol',{info});
       }
     });
 });
+
+
+//finalizar--------------solicitudes----------------------------------->
+router.get('/finalizarSol/:idSol',async (req,res)=>{
+   const {idSol} = req.params;
+   console.log(idSol);
+   await axios({ 
+    method: 'put',   
+    url: 'http://localhost:4000/aplicacion/finalizarSol/'+idSol,
+}).then((response,err,body)=>{
+    req.flash('message',idSol + ' fue finaliado correctamente');
+    res.redirect(301,'back') 
+}).catch((e)=>{
+   console.log(e);
+   console.log(e)
+   res.redirect(301,'/aplicacion/solicitudes')
+});
+})
    /////////////////////////////////RESULTADOS-----INICIO////////////////////////////////////////////////////////
 
 //listar---------RESULTADOS ------------------------------------------------------------------->
@@ -556,4 +573,45 @@ router.get('/resultados',async(req,res)=>{
  }); 
   
   }); 
+  /////////////////////////////////PERSONAL-----FACTURAS////////////////////////////////////////////////////////
+
+//listar---------facturas------------------------------------------------------------------->
+router.get('/facturas',async(req,res)=>{
+  const auxi = req.session.passport; 
+  const id = auxi.user;
+  req.session.idUsuarios = id;
+  const grad = await pool.query('select grado from usuarios where idUsuarios = ?',[id]);
+  const aux = grad[0];
+  const grado = aux.grado
+  req.session.grado = grado;
+  await request("http://localhost:4000/aplicacion/listarFacturas/"+id,(err,response,body)=>{  
+    if(grado === 1){
+      const infoAdmin =JSON.parse(body);
+      console.log(infoAdmin)
+      res.render('aplicacion/listar/listarFacturas',{infoAdmin})
+    };
+    if(grado === 2){
+      const infoDoc =JSON.parse(body);
+      console.log('doc')
+      res.render('aplicacion/listar/listarPersonal',{infoDoc})
+    };
+    if(grado === 3){
+       
+    }
+ 
+ }); 
+});
+//eliminar-----------facturas------------------------------------------------>
+router.get('/eliminarFac/:idFac',async(req,res)=>{
+  console.log('carajo')
+  const {idFac} = req.params;
+  console.log(req.params);
+axios.delete('http://localhost:4000/aplicacion/eliminarFac/'+idFac)
+.then((response,err,body)=>{
+  res.redirect(301,'back') 
+}).catch((e)=>{
+ console.log(e);
+ res.redirect(301,'facturas')
+});
+});
 module.exports= router;  

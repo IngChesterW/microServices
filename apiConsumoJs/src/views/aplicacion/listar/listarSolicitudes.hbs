@@ -271,7 +271,7 @@
 	{{#if infoPac}}
 <div class="containerdash">
 		<div class="navigation">
-			<ul>
+				<ul>
 				<li>
 					<a >
 						
@@ -283,43 +283,36 @@
 
 				<li>
 					<a href="/aplicacion/Usuario">
-						<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+						<span class="icon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
 						<span class="title">MI PERFIL</span>
 					</a>
 				</li>
 				<li>
-					<a href="/aplicacion/paciente">
-						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-						<span class="title">MIS PACIENTES </span>
+					<a href="/aplicacion/solicitudes">
+						<span class="icon"><i class="fa fa-file-text" aria-hidden="true"></i></span>
+						<span class="title">MI HISTORIAL </span>
 					</a>
 				</li>
 					<li>
 					<a href="/aplicacion/categorias">
-						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-						<span class="title">MIS SERVICIOS</span>
+						<span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+						<span class="title">SOLICITAR SERVICIOS</span>
 					</a>
 				</li>
 			
-			
-				<li>
-					<a href="/aplicacion/Personal">
-						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-						<span class="title">MI HISTORIAL</span>
-					</a>
-				</li>
 
 								<li>
-					<a href="/aplicacion/solicitudes">
-						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-						<span class="title">SOLICITUDES</span>
+					<a href="/aplicacion/resultados">
+						<span class="icon"><i class="fa fa-wpforms" aria-hidden="true"></i></span>
+						<span class="title">MIS RESULTADOS</span>
 					</a>
 				</li>
 								
 							
 								<li>
-					<a href="/aplicacion/DetalleVentas">
+					<a href="/authentication/logOut">
 						<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-						<span class="title">FACTURAS</span>
+						<span class="title">salir</span>
 					</a>
 				</li>
 			</ul>
@@ -334,15 +327,7 @@
 			<div class="details">
 				<div class="recentOrders">
 					  <div class="cardHeader">
-						<h2 >LISTA DE DEPARTAMENTOS </h2>
-						<label style="	background: #03a9f4;
-	color: #fff;" for="cars">Choose a car:</label>
-						<select name="cars" id="cars">
-						<option value="volvo">Volvo</option>
-						<option value="saab">Saab</option>
-						<option value="mercedes">Mercedes</option>
-						<option value="audi">Audi</option>
-						</select>
+						<h2 >LISTA DE SOLICITUDES </h2>
 		   
 					</div>
 	
@@ -480,12 +465,6 @@
 				</li>
 			
 			
-				<li>
-					<a href="/aplicacion/Personal">
-						<span class="icon"><i class="fa fa-book" aria-hidden="true"></i></span>
-						<span class="title">MI HISTORIAL</span>
-					</a>
-				</li>
 
 								<li>
 					<a href="/aplicacion/solicitudes">
@@ -546,19 +525,6 @@
     
         <tbody>
 
-       	
-        <tr>                       
-			                        
-								  <td><h5> IDdOCTOR : </h5>{{idUsuarios}}</td>
-            						<td><h5> PACIENTE : </h5>{{nombre}}</td>
-									<td><h5> APELLIDOS : </h5>{{apellidos}}</td>
-									<td><h5> TELEFONO : </h5>{{telefono}}</td>
-									<td><h5> FECHA NAC : </h5>{{fechaNac}}</td>
-								   
-
-                                  
-                             
-        </tr>
    
 
 	 {{#each pacientes}}	
@@ -699,7 +665,7 @@
 			<div class="details">
 				<div class="recentOrders">
 					  <div class="cardHeader">
-						<h2 >LISTA DE DEPARTAMENTOS </h2>
+						<h2 >LISTA DE DEPARTAMENTODS </h2>
 				</div>
 	
 
